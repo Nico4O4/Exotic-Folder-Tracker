@@ -1,7 +1,11 @@
 import os, time, sys
 import json
 
-os.chdir(os.path.dirname(os.path.abspath(__file__))) #wechselt in das verzeichnis der .py datei, damit die configs immer im selben ordner liegen
+if getattr(sys, 'frozen', False):# wird ausgeführt bei der .exe file
+    base_path = os.path.dirname(sys.executable) #schaut in den ordner wo die file ausgeführt wird bei ner .exe ist es die exe selbst
+else: #wird ausgeführt wenn es eine .py file ist
+    py_file_path = os.path.dirname(os.path.abspath(__file__))#schaut in den ordner wo __file__ liegt das ist sowas wie die py file aktuell hier
+#(es ist wie ein interner marker um die aktuelle file zu orten)
 
 #--JSON Existiert--
 def json_config():
@@ -28,6 +32,7 @@ def json_config():
         
             with open("configs.json", "x") as file:
                 json.dump(data_short_saver, file, indent=4) #data_short_saver -> info mit dict aka dateiobjeekt | file -> geöffnet json file an sich
+                json_created_at = os.getcwd()
         
             with open("configs.json", "r") as f:
                 data = json.load(f)#LOAD = echtes dict /list/ objekt [] {} ||| LOADS = dict / list in string "{}" "[]" wandelt es in echte um         
@@ -37,7 +42,7 @@ def json_config():
 
                 os.chdir(value_from_dict)
                 
-                print("DONE - JSON FILE CREATED AT: ", os.getcwd())
+                print("DONE - JSON FILE CREATED AT: ", json_created_at)
                 programm()
         else:
             print("\nInvalid User Input. Please Insert Valid Path to Track files.\n")

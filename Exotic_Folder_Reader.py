@@ -1,12 +1,11 @@
 import os, time
 import json
 
+os.chdir(os.path.dirname(os.path.abspath(__file__))) #wechselt in das verzeichnis der .py datei, damit die configs immer im selben ordner liegen
 
 #--JSON Existiert--
 def json_config():
-    
-    os.chdir(os.path.dirname(os.path.abspath(__file__))) #wechselt in das verzeichnis der .py datei, damit die configs immer im selben ordner liegen
-    
+        
     if os.path.exists("configs.json"):#falls file vorhanden
         with open("configs.json", "r") as f:
             data = json.load(f)#LOAD = echtes dict /list/ objekt [] {} ||| LOADS = dict / list in string "{}" "[]" wandelt es in echte um         
@@ -20,9 +19,7 @@ def json_config():
 
 
 #--Falls JSON File nicht vorhanden--
-    else:
-        os.chdir(os.path.dirname(os.path.abspath(__file__))) #wechselt in das verzeichnis der .py datei, damit die configs immer im selben ordner liegen
-     
+    else:     
         user_input = input("Insert Path to track the Folder: ")
         
         formatted_user_input = user_input.replace('"', '') # -> ' ' entfern das "" aus dem user innput weil pfade das oft enthalten und ersetzt es mit nichts
@@ -43,7 +40,7 @@ def json_config():
                 print("DONE - JSON FILE CREATED AT: ", os.getcwd())
                 programm()
         else:
-            print("\nInvalid User Input. Please Insert Valid Path to Track files.")
+            print("\nInvalid User Input. Please Insert Valid Path to Track files.\n")
             json_config()
         
 
@@ -87,7 +84,7 @@ def programm():
             print(f"\n---CONTENTS OF THE FILE---\n\n")
             print(contents)
     else:
-        print("No .txt file detected. Folder maybe empty or no .txt file in it.")
+        print("\nNo .txt file detected. Folder maybe empty or no .txt file in it.")
 
     x = input("\nPress Enter to exit... ")
     exit()

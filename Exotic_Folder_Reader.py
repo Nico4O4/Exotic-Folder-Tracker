@@ -1,4 +1,4 @@
-import os, time
+import os, time, sys
 import json
 
 os.chdir(os.path.dirname(os.path.abspath(__file__))) #wechselt in das verzeichnis der .py datei, damit die configs immer im selben ordner liegen
@@ -87,7 +87,7 @@ def programm():
         print("\nNo .txt file detected. Folder maybe empty or no .txt file in it.")
 
     x = input("\nPress Enter to exit... ")
-    exit()
+    sys.exit()
 
 
 json_config()
